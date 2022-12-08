@@ -84,16 +84,6 @@ _G.packer_plugins = {
     path = "/Users/phuclam/.local/share/nvim/site/pack/packer/start/DAPInstall.nvim",
     url = "https://github.com/ravenxrz/DAPInstall.nvim"
   },
-  LuaSnip = {
-    loaded = true,
-    path = "/Users/phuclam/.local/share/nvim/site/pack/packer/start/LuaSnip",
-    url = "https://github.com/L3MON4D3/LuaSnip"
-  },
-  ["alpha-nvim"] = {
-    loaded = true,
-    path = "/Users/phuclam/.local/share/nvim/site/pack/packer/start/alpha-nvim",
-    url = "https://github.com/goolord/alpha-nvim"
-  },
   ["bufferline.nvim"] = {
     loaded = true,
     path = "/Users/phuclam/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
@@ -128,11 +118,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/phuclam/.local/share/nvim/site/pack/packer/start/darkplus.nvim",
     url = "https://github.com/lunarvim/darkplus.nvim"
-  },
-  ["friendly-snippets"] = {
-    loaded = true,
-    path = "/Users/phuclam/.local/share/nvim/site/pack/packer/start/friendly-snippets",
-    url = "https://github.com/rafamadriz/friendly-snippets"
   },
   ["github-colors"] = {
     loaded = true,
@@ -244,11 +229,6 @@ _G.packer_plugins = {
     path = "/Users/phuclam/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
-  ["project.nvim"] = {
-    loaded = true,
-    path = "/Users/phuclam/.local/share/nvim/site/pack/packer/start/project.nvim",
-    url = "https://github.com/ahmedkhalf/project.nvim"
-  },
   ["spelunker.vim"] = {
     loaded = true,
     path = "/Users/phuclam/.local/share/nvim/site/pack/packer/start/spelunker.vim",
@@ -258,11 +238,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/phuclam/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
-  },
-  ["toggleterm.nvim"] = {
-    loaded = true,
-    path = "/Users/phuclam/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
-    url = "https://github.com/akinsho/toggleterm.nvim"
   },
   ["tokyonight.nvim"] = {
     loaded = true,
