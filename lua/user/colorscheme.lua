@@ -1,6 +1,7 @@
-local colorscheme = "zenbones"
+local colorscheme = "tender"
 
-vim.g.zenbones = { transparent_background = true }
+-- vim.g.neobones = { transparent_background = true }
+vim.g.macvim_skip_colorscheme = 1
 
 local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 if not status_ok then

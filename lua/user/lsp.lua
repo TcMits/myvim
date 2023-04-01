@@ -3,6 +3,12 @@ if not lsp_ok then
   return
 end
 
+local util_ok, util = pcall(require, "lspconfig/util")
+if not util_ok then
+  return
+end
+
+
 local servers = {
   "gopls",
   "sumneko_lua",
@@ -13,6 +19,7 @@ local servers = {
   "bashls",
   "jsonls",
   "yamlls",
+  "eslint",
 }
 
 lsp.preset("recommended")
@@ -37,7 +44,10 @@ lsp.configure("pyright", {
       },
     },
   },
+})
 
+lsp.configure("tsserver", {
+  filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
 })
 
 local cmp_status_ok, cmp = pcall(require, "cmp")
@@ -70,32 +80,36 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
   -- Set `select` to `false` to only confirm explicitly selected items.
   ["<CR>"] = cmp.mapping.confirm({ select = true }),
   ["<Tab>"] = cmp.mapping(function(fallback)
+    local copilot_keys = vim.fn['copilot#Accept']()
+
     if cmp.visible() then
       cmp.select_next_item()
     elseif luasnip.expandable() then
       luasnip.expand()
     elseif luasnip.expand_or_jumpable() then
       luasnip.expand_or_jump()
+    elseif copilot_keys ~= '' and type(copilot_keys) == 'string' then
+      vim.api.nvim_feedkeys(copilot_keys, 'i', true)
     elseif check_backspace() then
       fallback()
     else
       fallback()
     end
   end, {
-  "i",
-  "s",
-}),
-["<S-Tab>"] = cmp.mapping(function(fallback)
-  if cmp.visible() then
-    cmp.select_prev_item()
-  elseif luasnip.jumpable(-1) then
-    luasnip.jump(-1)
-  else
-    fallback()
-  end
-end, {
-"i",
-"s",
+    "i",
+    "s",
+  }),
+  ["<S-Tab>"] = cmp.mapping(function(fallback)
+    if cmp.visible() then
+      cmp.select_prev_item()
+    elseif luasnip.jumpable(-1) then
+      luasnip.jump(-1)
+    else
+      fallback()
+    end
+  end, {
+    "i",
+    "s",
   }),
 })
 
@@ -104,7 +118,7 @@ lsp.setup_nvim_cmp({
 })
 
 lsp.set_preferences({
-  suggest_lsp_servers = false,
+  suggest_lsp_servers = true,
   sign_icons = {
     error = "E",
     warn = "W",
@@ -125,7 +139,7 @@ lsp.on_attach(function(client, bufnr)
   keymap("n", "gd", vim.lsp.buf.definition, opts)
   keymap("n", "K", vim.lsp.buf.hover, opts)
   keymap("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
-  keymap("n", "gl",vim.diagnostic.open_float, opts)
+  keymap("n", "gl", vim.diagnostic.open_float, opts)
   keymap("n", "<leader>lj", vim.diagnostic.goto_next, opts)
   keymap("n", "<leader>lk", vim.diagnostic.goto_prev, opts)
   keymap("n", "<leader>la", vim.lsp.buf.code_action, opts)
