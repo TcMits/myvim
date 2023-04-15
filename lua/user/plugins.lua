@@ -65,7 +65,7 @@ return packer.startup(function(use)
     -- In Vim, compat mode is turned on as Lush only works in Neovim.
     requires = "rktjmp/lush.nvim",
   })
-  use({ "jacoborus/tender.vim" })
+  use({ "tinted-theming/base16-vim" })
 
   use({
     "VonHeikemen/lsp-zero.nvim",

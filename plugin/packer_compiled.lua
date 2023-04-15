@@ -84,6 +84,11 @@ _G.packer_plugins = {
     path = "/Users/phuclam/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+  ["base16-vim"] = {
+    loaded = true,
+    path = "/Users/phuclam/.local/share/nvim/site/pack/packer/start/base16-vim",
+    url = "https://github.com/tinted-theming/base16-vim"
+  },
   ["bufferline.nvim"] = {
     loaded = true,
     path = "/Users/phuclam/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
@@ -208,11 +213,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/phuclam/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
-  },
-  ["tender.vim"] = {
-    loaded = true,
-    path = "/Users/phuclam/.local/share/nvim/site/pack/packer/start/tender.vim",
-    url = "https://github.com/jacoborus/tender.vim"
   },
   ["vim-bbye"] = {
     loaded = true,
