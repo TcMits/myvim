@@ -56,6 +56,8 @@ return packer.startup(function(use)
   -- Copilot
   use({ "github/copilot.vim" })
 
+  -- Indentation
+  use({ "lukas-reineke/indent-blankline.nvim" })
 
   -- Colorschemes
   use({

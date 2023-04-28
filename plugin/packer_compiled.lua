@@ -139,6 +139,11 @@ _G.packer_plugins = {
     path = "/Users/phuclam/.local/share/nvim/site/pack/packer/start/impatient.nvim",
     url = "https://github.com/lewis6991/impatient.nvim"
   },
+  ["indent-blankline.nvim"] = {
+    loaded = true,
+    path = "/Users/phuclam/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
+    url = "https://github.com/lukas-reineke/indent-blankline.nvim"
+  },
   ["lsp-zero.nvim"] = {
     loaded = true,
     path = "/Users/phuclam/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",

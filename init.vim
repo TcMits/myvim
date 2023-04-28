@@ -1,6 +1,7 @@
 lua << EOF
 require("config")
 EOF
+
 set nospell
 " Enable spelunker.vim. (default: 1)
 " 1: enable
