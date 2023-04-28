@@ -46,6 +46,16 @@ lsp.configure("pyright", {
   },
 })
 
+-- keyOrdering is so annoying
+lsp.configure("yamlls", {
+  settings = {
+    yaml = {
+      keyOrdering = false
+    }
+  }
+})
+
+
 lsp.configure("tsserver", {
   filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
 })

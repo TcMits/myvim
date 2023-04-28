@@ -68,8 +68,8 @@ keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.curren
 keymap("x", "<leader>/", '<ESC><CMD>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<CR>')
 
 -- format
--- keymap("n", "=", ":LspZeroFormat<CR>", opts)
--- keymap("v", "=", ":LspZeroFormat<CR>", opts)
+keymap("n", "=", ":LspZeroFormat<CR>", opts)
+keymap("v", "=", ":LspZeroFormat<CR>", opts)
 
 -- Copilot
 vim.g.copilot_no_tab_map = true
