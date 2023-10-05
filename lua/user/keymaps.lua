@@ -75,3 +75,29 @@ keymap("v", "=", ":LspZeroFormat<CR>", opts)
 vim.g.copilot_no_tab_map = true
 vim.g.copilot_assume_mapped = true
 vim.g.copilot_tab_fallback = ""
+
+
+-- Debug
+keymap('n', '<leader>db', ":lua require 'dap'.toggle_breakpoint()<CR>")
+keymap('n', '<leader>dB',
+  ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>")
+keymap({ 'n', 't' }, '<leader>dk', ":lua require 'dap'.step_out()<CR>")
+keymap({ 'n', 't' }, "<leader>dl", ":lua require 'dap'.step_into()<CR>")
+keymap({ 'n', 't' }, '<leader>dj', ":lua require 'dap'.step_over()<CR>")
+keymap({ 'n', 't' }, '<leader>dh', ":lua require 'dap'.continue()<CR>")
+keymap('n', '<leader>dn', ":lua require 'dap'.run_to_cursor()<CR>")
+keymap('n', '<leader>dc', ":lua require 'dap'.terminate()<CR>")
+keymap('n', '<leader>dR', ":lua require 'dap'.clear_breakpoints()<CR>")
+keymap('n', '<leader>de', ":lua require 'dap'.set_exception_breakpoints({ 'all' })<CR>")
+keymap('n', '<leader>da', ":lua require 'debugHelper'.attach()<CR>")
+keymap('n', '<leader>dA', ":lua require 'debugHelper'.attachToRemote()<CR>")
+keymap('n', '<leader>di', ":lua require 'dap.ui.widgets'.hover()<CR>")
+keymap('n', '<leader>d?', function()
+  local widgets = require "dap.ui.widgets";
+  widgets.centered_float(widgets.scopes)
+end)
+keymap('n', '<leader>dK', ':lua require"dap".up()<CR>zz')
+keymap('n', '<leader>dJ', ':lua require"dap".down()<CR>zz')
+keymap('n', '<leader>dr',
+  ':lua require"dap".repl.toggle({}, "vsplit")<CR><C-w>l')
+keymap('n', '<leader>du', ':lua require"dapui".toggle()<CR>')

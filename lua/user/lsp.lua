@@ -3,12 +3,6 @@ if not lsp_ok then
   return
 end
 
-local util_ok, util = pcall(require, "lspconfig/util")
-if not util_ok then
-  return
-end
-
-
 local servers = {
   "gopls",
   "sumneko_lua",
@@ -40,7 +34,10 @@ lsp.configure("pyright", {
   settings = {
     python = {
       analysis = {
+        autoSearchPaths = true,
         typeCheckingMode = "off",
+        useLibraryCodeForTypes = true,
+        diagnosticMode = 'openFilesOnly',
       },
     },
   },
@@ -51,6 +48,17 @@ lsp.configure("yamlls", {
   settings = {
     yaml = {
       keyOrdering = false
+    }
+  }
+})
+
+
+lsp.configure("rust_analyzer", {
+  settings = {
+    ['rust-analyzer'] = {
+      diagnostics = {
+        disabled = { "unresolved-proc-macro" },
+      }
     }
   }
 })

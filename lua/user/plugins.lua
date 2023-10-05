@@ -59,6 +59,11 @@ return packer.startup(function(use)
   -- Indentation
   use({ "lukas-reineke/indent-blankline.nvim" })
 
+  -- Debug
+  use({ "mfussenegger/nvim-dap" })
+  use({ "rcarriga/nvim-dap-ui" })
+  use({ "ravenxrz/DAPInstall.nvim" })
+
   -- Colorschemes
   use({
     "mcchrish/zenbones.nvim",
