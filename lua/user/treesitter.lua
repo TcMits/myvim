@@ -1,12 +1,28 @@
-local status_ok, configs = pcall(require, "nvim-treesitter.configs")
-if not status_ok then
-  return
-end
+local configs = require("nvim-treesitter.configs")
 
 configs.setup({
-  ensure_installed = "all", -- one of "all" or a list of languages
+  ensure_installed = {
+    "rust",
+    "bash",
+    "lua",
+    "python",
+    "toml",
+    "yaml",
+    "json",
+    "html",
+    "css",
+    "javascript",
+    "typescript",
+    "tsx",
+    "cpp",
+    "cmake",
+    "go",
+    "java",
+    "latex",
+    "regex",
+  },                     -- one of "all" or a list of languages
   highlight = {
-    enable = true, -- false will disable the whole extension
+    enable = true,       -- false will disable the whole extension
     disable = { "css" }, -- list of language that will be disabled
 
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.

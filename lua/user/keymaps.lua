@@ -67,10 +67,6 @@ keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)
 keymap("x", "<leader>/", '<ESC><CMD>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<CR>')
 
--- format
-keymap("n", "=", ":LspZeroFormat<CR>", opts)
-keymap("v", "=", ":LspZeroFormat<CR>", opts)
-
 -- Copilot
 vim.g.copilot_no_tab_map = true
 vim.g.copilot_assume_mapped = true

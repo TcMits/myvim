@@ -1,11 +1,7 @@
-local lsp_ok, lsp = pcall(require, "lsp-zero")
-if not lsp_ok then
-  return
-end
+local lsp = require("lsp-zero")
 
 local servers = {
   "gopls",
-  "sumneko_lua",
   "cssls",
   "html",
   "tsserver",
@@ -14,21 +10,11 @@ local servers = {
   "jsonls",
   "yamlls",
   "eslint",
+  "lua_ls",
+  "ruff_lsp",
 }
 
 lsp.preset("recommended")
-lsp.ensure_installed(servers)
-
--- Fix Undefined global 'vim'
-lsp.configure("sumneko_lua", {
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { "vim" },
-      },
-    },
-  },
-})
 
 lsp.configure("pyright", {
   settings = {
@@ -68,15 +54,8 @@ lsp.configure("tsserver", {
   filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
 })
 
-local cmp_status_ok, cmp = pcall(require, "cmp")
-if not cmp_status_ok then
-  return
-end
-
-local snip_status_ok, luasnip = pcall(require, "luasnip")
-if not snip_status_ok then
-  return
-end
+local cmp = require("cmp")
+local luasnip = require("luasnip")
 
 local check_backspace = function()
   local col = vim.fn.col(".") - 1
@@ -131,7 +110,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
   }),
 })
 
-lsp.setup_nvim_cmp({
+lsp.setup({
   mapping = cmp_mappings,
 })
 
@@ -165,6 +144,37 @@ lsp.on_attach(function(client, bufnr)
   keymap("n", "<leader>lr", vim.lsp.buf.rename, opts)
   keymap("i", "<C-h>", vim.lsp.buf.signature_help, opts)
 end)
+
+lsp.format_mapping('=', {
+  format_opts = {
+    async = true,
+    timeout_ms = 10000,
+  },
+  servers = {
+    ['tsserver'] = { 'javascript', 'typescript' },
+    ['rust_analyzer'] = { 'rust' },
+    ['ruff_lsp'] = { 'python' },
+    ['lua_ls'] = { 'lua' },
+    ['gopls'] = { 'go' },
+    ['pyright'] = { 'python' },
+    ['bashls'] = { 'bash' },
+    ['jsonls'] = { 'json' },
+    ['yamlls'] = { 'yaml' },
+    ['html'] = { 'html' },
+    ['cssls'] = { 'css' },
+  }
+})
+
+
+require('mason').setup({})
+require('mason-lspconfig').setup({
+  -- Replace the language servers listed here
+  -- with the ones you want to install
+  ensure_installed = { 'tsserver', 'rust_analyzer' },
+  handlers = {
+    lsp.default_setup,
+  },
+})
 
 lsp.setup()
 

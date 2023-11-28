@@ -1,6 +1,2 @@
-local indent_blankline_ok, indent_blankline = pcall(require, "ibl")
-if not indent_blankline_ok then
-  return
-end
-
+local indent_blankline = require("ibl")
 indent_blankline.setup()
