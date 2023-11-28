@@ -44,10 +44,10 @@ return packer.startup(function(use)
   use({ "wbthomason/packer.nvim" }) -- Have packer manage itself
   use({ "numToStr/Comment.nvim" })
   use({ "kyazdani42/nvim-web-devicons" })
-  use({ "kyazdani42/nvim-tree.lua" })
-  use({ "akinsho/bufferline.nvim" })
+  use({ 'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons' } })
+  use({ 'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons' })
   use({ "moll/vim-bbye" })
-  use({ "nvim-lualine/lualine.nvim" })
+  use({ "nvim-lualine/lualine.nvim", requires = { 'nvim-tree/nvim-web-devicons', opt = true } })
   use({ "lewis6991/impatient.nvim" })
   use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
   use({ "kamykn/spelunker.vim" })
@@ -100,6 +100,7 @@ return packer.startup(function(use)
   use({ "nvim-telescope/telescope.nvim" })
 
   -- Treesitter
+  use({ "vrischmann/tree-sitter-templ" })
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 
   -- Git
