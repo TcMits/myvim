@@ -177,7 +177,7 @@ lsp.format_mapping('=', {
     ['cssls'] = { 'css' },
     ['cmake'] = { 'cmake' },
     ['templ'] = { 'templ' },
-    ['tailwindcss'] = { 'templ', 'html', 'css' },
+    ['tailwindcss'] = { 'html', 'css' },
   }
 })
 
