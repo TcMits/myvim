@@ -20,10 +20,10 @@ configs.setup({
     "java",
     "latex",
     "regex",
-  },                     -- one of "all" or a list of languages
+    "templ",
+  },               -- one of "all" or a list of languages
   highlight = {
-    enable = true,       -- false will disable the whole extension
-    disable = { "css" }, -- list of language that will be disabled
+    enable = true, -- false will disable the whole extension
 
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).

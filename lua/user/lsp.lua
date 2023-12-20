@@ -12,6 +12,11 @@ local servers = {
   "eslint",
   "lua_ls",
   "ruff_lsp",
+  "ccls",
+  "cmake",
+  "templ",
+  "templ",
+  "tailwindcss"
 }
 
 lsp.preset("recommended")
@@ -54,6 +59,18 @@ lsp.configure("tsserver", {
   filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
 })
 
+
+lsp.configure("tailwindcss", {
+  filetypes = {
+    'templ'
+  },
+  init_options = {
+    userLanguages = {
+      templ = "html"
+    }
+  }
+})
+
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 
@@ -77,16 +94,12 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
   -- Set `select` to `false` to only confirm explicitly selected items.
   ["<CR>"] = cmp.mapping.confirm({ select = true }),
   ["<Tab>"] = cmp.mapping(function(fallback)
-    local copilot_keys = vim.fn['copilot#Accept']()
-
     if cmp.visible() then
       cmp.select_next_item()
     elseif luasnip.expandable() then
       luasnip.expand()
     elseif luasnip.expand_or_jumpable() then
       luasnip.expand_or_jump()
-    elseif copilot_keys ~= '' and type(copilot_keys) == 'string' then
-      vim.api.nvim_feedkeys(copilot_keys, 'i', true)
     elseif check_backspace() then
       fallback()
     else
@@ -110,7 +123,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
   }),
 })
 
-lsp.setup({
+cmp.setup({
   mapping = cmp_mappings,
 })
 
@@ -168,9 +181,7 @@ lsp.format_mapping('=', {
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  -- Replace the language servers listed here
-  -- with the ones you want to install
-  ensure_installed = { 'tsserver', 'rust_analyzer' },
+  ensure_installed = servers,
   handlers = {
     lsp.default_setup,
   },

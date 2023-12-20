@@ -15,12 +15,10 @@ require("lazy").setup({
   -- My plugins here
   { "numToStr/Comment.nvim" },
   { "kyazdani42/nvim-web-devicons" },
-  { 'nvim-tree/nvim-tree.lua', dependencies = { 'nvim-tree/nvim-web-devicons' } },
-  { 'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons' },
   { "moll/vim-bbye" },
-  { "nvim-lualine/lualine.nvim", dependencies = { 'nvim-tree/nvim-web-devicons' } },
+  { "nvim-lualine/lualine.nvim",          dependencies = { 'nvim-tree/nvim-web-devicons' } },
   { "lewis6991/impatient.nvim" },
-  { "TimUntersberger/neogit", dependencies = "nvim-lua/plenary.nvim" },
+  { "TimUntersberger/neogit",             dependencies = "nvim-lua/plenary.nvim" },
   { "kamykn/spelunker.vim" },
   { "terryma/vim-multiple-cursors" },
 
@@ -71,7 +69,6 @@ require("lazy").setup({
   { "nvim-telescope/telescope.nvim" },
 
   -- Treesitter
-  { "vrischmann/tree-sitter-templ" },
   { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" },
 
   -- Git

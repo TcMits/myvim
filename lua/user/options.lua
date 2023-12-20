@@ -41,3 +41,10 @@ vim.opt.whichwrap:append("<,>,[,],h,l")
 vim.opt.iskeyword:append("-")
 vim.opt.list = true
 vim.opt.listchars:append "eol:↴"
+vim.g.netrw_bufsettings = "noma nomod nu nobl nowrap ro nornu"
+-- additional filetypes
+vim.filetype.add({
+  extension = {
+    templ = "templ",
+  },
+})

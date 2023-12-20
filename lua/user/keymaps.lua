@@ -54,8 +54,8 @@ keymap("v", ">", ">gv", opts)
 
 -- Plugins --
 
--- NvimTree
-keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
+-- Explore
+keymap("n", "<leader>e", ":E<CR>", opts)
 
 -- Telescope
 keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
@@ -68,9 +68,8 @@ keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.curren
 keymap("x", "<leader>/", '<ESC><CMD>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<CR>')
 
 -- Copilot
+keymap("i", "<leader>j", "copilot#Accept(\"<CR>\")", { expr = true, replace_keycodes = false })
 vim.g.copilot_no_tab_map = true
-vim.g.copilot_assume_mapped = true
-vim.g.copilot_tab_fallback = ""
 
 
 -- Debug
