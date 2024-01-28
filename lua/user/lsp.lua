@@ -12,11 +12,10 @@ local servers = {
   "eslint",
   "lua_ls",
   "ruff_lsp",
-  "ccls",
   "cmake",
   "templ",
-  "templ",
-  "tailwindcss"
+  "tailwindcss",
+  "bufls",
 }
 
 lsp.preset("recommended")
@@ -69,6 +68,19 @@ lsp.configure("tailwindcss", {
       templ = "html"
     }
   }
+})
+
+
+lsp.configure("gopls", {
+  settings = {
+    gopls = {
+      gofumpt = true
+    }
+  }
+})
+
+lsp.configure("clangd", {
+  filetypes = { "c", "cpp", "objc", "objcpp" },
 })
 
 local cmp = require("cmp")
@@ -125,6 +137,14 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 
 cmp.setup({
   mapping = cmp_mappings,
+  sources = {
+    -- Copilot Source
+    { name = "copilot",  group_index = 2 },
+    -- Other Sources
+    { name = "nvim_lsp", group_index = 2 },
+    { name = "path",     group_index = 2 },
+    { name = "luasnip",  group_index = 2 },
+  },
 })
 
 lsp.set_preferences({
@@ -178,6 +198,7 @@ lsp.format_mapping('=', {
     ['cmake'] = { 'cmake' },
     ['templ'] = { 'templ' },
     ['tailwindcss'] = { 'html', 'css' },
+    ['bufls'] = { 'proto' },
   }
 })
 

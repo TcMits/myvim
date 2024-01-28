@@ -76,3 +76,8 @@ let g:spelunker_complex_or_compound_word_group = 'SpelunkerComplexOrCompoundWord
 " Override highlight setting.
 highlight SpelunkerSpellBad cterm=underline ctermfg=247 gui=underline guifg=#9e9e9e
 highlight SpelunkerComplexOrCompoundWord cterm=underline ctermfg=NONE gui=underline guifg=NONE
+
+" protobuf
+augroup filetype
+  au! BufRead,BufNewFile *.proto setfiletype proto
+augroup end

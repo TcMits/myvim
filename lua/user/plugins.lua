@@ -22,16 +22,8 @@ require("lazy").setup({
   { "kamykn/spelunker.vim" },
   { "terryma/vim-multiple-cursors" },
 
-  -- Copilot
-  { "github/copilot.vim" },
-
   -- Indentation
   { "lukas-reineke/indent-blankline.nvim" },
-
-  -- Debug
-  { "mfussenegger/nvim-dap" },
-  { "rcarriga/nvim-dap-ui" },
-  { "ravenxrz/DAPInstall.nvim" },
 
   -- Colorschemes
   {
@@ -58,6 +50,9 @@ require("lazy").setup({
       { "saadparwaiz1/cmp_luasnip" },
       { "hrsh7th/cmp-nvim-lsp" },
       { "hrsh7th/cmp-nvim-lua" },
+      { "zbirenbaum/copilot.lua" },
+      { "zbirenbaum/copilot-cmp" },
+
 
       -- Snippets
       { "L3MON4D3/LuaSnip" },

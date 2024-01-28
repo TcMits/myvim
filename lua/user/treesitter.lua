@@ -20,6 +20,7 @@ configs.setup({
     "java",
     "latex",
     "regex",
+    "make",
     "templ",
   },               -- one of "all" or a list of languages
   highlight = {
