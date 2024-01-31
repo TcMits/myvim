@@ -14,27 +14,19 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   -- My plugins here
   { "numToStr/Comment.nvim" },
-  { "kyazdani42/nvim-web-devicons" },
   { "moll/vim-bbye" },
   { "nvim-lualine/lualine.nvim",          dependencies = { 'nvim-tree/nvim-web-devicons' } },
   { "lewis6991/impatient.nvim" },
-  { "TimUntersberger/neogit",             dependencies = "nvim-lua/plenary.nvim" },
+  { "TimUntersberger/neogit" },
   { "kamykn/spelunker.vim" },
   { "terryma/vim-multiple-cursors" },
+  { "nvim-lua/plenary.nvim" },
 
   -- Indentation
   { "lukas-reineke/indent-blankline.nvim" },
 
   -- Colorschemes
-  {
-    "mcchrish/zenbones.nvim",
-    -- Optionally install Lush. Allows for more configuration or extending the colorscheme
-    -- If you don't want to install lush, make sure to set g:zenbones_compat = 1
-    -- In Vim, compat mode is turned on as Lush only works in Neovim.
-    dependencies = "rktjmp/lush.nvim",
-  },
   { "tinted-theming/base16-vim" },
-
   {
     "VonHeikemen/lsp-zero.nvim",
     dependencies = {
@@ -52,6 +44,7 @@ require("lazy").setup({
       { "hrsh7th/cmp-nvim-lua" },
       { "zbirenbaum/copilot.lua" },
       { "zbirenbaum/copilot-cmp" },
+      { "Exafunction/codeium.nvim" },
 
 
       -- Snippets

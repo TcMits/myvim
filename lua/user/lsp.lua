@@ -86,34 +86,15 @@ lsp.configure("clangd", {
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 
-local check_backspace = function()
-  local col = vim.fn.col(".") - 1
-  return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
-end
-
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
-  ["<C-k>"] = cmp.mapping.select_prev_item(cmp_select),
-  ["<C-j>"] = cmp.mapping.select_next_item(cmp_select),
-  ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
-  ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
-  ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-  ["<C-e>"] = cmp.mapping({
-    i = cmp.mapping.abort(),
-    c = cmp.mapping.close(),
-  }),
-  -- Accept currently selected item. If none selected, `select` first item.
-  -- Set `select` to `false` to only confirm explicitly selected items.
   ["<CR>"] = cmp.mapping.confirm({ select = true }),
   ["<Tab>"] = cmp.mapping(function(fallback)
     if cmp.visible() then
-      cmp.select_next_item()
+      cmp.select_next_item({ behavior = cmp.SelectBehavior.Replace })
     elseif luasnip.expandable() then
       luasnip.expand()
     elseif luasnip.expand_or_jumpable() then
       luasnip.expand_or_jump()
-    elseif check_backspace() then
-      fallback()
     else
       fallback()
     end
@@ -140,6 +121,8 @@ cmp.setup({
   sources = {
     -- Copilot Source
     { name = "copilot",  group_index = 2 },
+    -- codeium Source
+    { name = "codeium",  group_index = 2 },
     -- Other Sources
     { name = "nvim_lsp", group_index = 2 },
     { name = "path",     group_index = 2 },
