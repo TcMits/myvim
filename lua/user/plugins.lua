@@ -22,6 +22,9 @@ require("lazy").setup({
   { "terryma/vim-multiple-cursors" },
   { "nvim-lua/plenary.nvim" },
 
+  -- Distraction
+  { "folke/zen-mode.nvim", opts = { window = { width = 0.85 } } },
+
   -- Indentation
   { "lukas-reineke/indent-blankline.nvim" },
 
@@ -45,7 +48,6 @@ require("lazy").setup({
       { "zbirenbaum/copilot.lua" },
       { "zbirenbaum/copilot-cmp" },
       { "Exafunction/codeium.nvim" },
-
 
       -- Snippets
       { "L3MON4D3/LuaSnip" },
