@@ -19,7 +19,6 @@ require("lazy").setup({
   { "lewis6991/impatient.nvim" },
   { "TimUntersberger/neogit" },
   { "kamykn/spelunker.vim" },
-  { "terryma/vim-multiple-cursors" },
   { "nvim-lua/plenary.nvim" },
 
   -- Indentation
