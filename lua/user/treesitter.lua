@@ -2,6 +2,10 @@ local configs = require("nvim-treesitter.configs")
 
 configs.setup({
   ensure_installed = {
+    "c",
+    "query",
+    "markdown",
+    "markdown_inline",
     "rust",
     "bash",
     "lua",
@@ -22,6 +26,8 @@ configs.setup({
     "regex",
     "make",
     "templ",
+    "vim",
+    "vimdoc",
   },               -- one of "all" or a list of languages
   highlight = {
     enable = true, -- false will disable the whole extension
@@ -31,6 +37,13 @@ configs.setup({
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
+    disable = function(lang, buf)
+      local max_filesize = 100 * 1024 -- 100 KB
+      local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+      if ok and stats and stats.size > max_filesize then
+        return true
+      end
+    end,
   },
   sync_install = false,
   auto_install = true,

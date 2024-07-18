@@ -43,8 +43,4 @@ vim.opt.list = true
 vim.opt.listchars:append "eol:↴"
 vim.g.netrw_bufsettings = "noma nomod nu nobl nowrap ro nornu"
 -- additional filetypes
-vim.filetype.add({
-  extension = {
-    templ = "templ",
-  },
-})
+vim.filetype.add({ extension = { templ = "templ" }})

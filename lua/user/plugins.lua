@@ -16,16 +16,19 @@ require("lazy").setup({
   { "numToStr/Comment.nvim" },
   { "moll/vim-bbye" },
   { "nvim-lualine/lualine.nvim",          dependencies = { 'nvim-tree/nvim-web-devicons' } },
-  { "lewis6991/impatient.nvim" },
   { "TimUntersberger/neogit" },
-  { "kamykn/spelunker.vim" },
-  { "nvim-lua/plenary.nvim" },
 
   -- Indentation
   { "lukas-reineke/indent-blankline.nvim" },
 
   -- Colorschemes
-  { "tinted-theming/base16-vim" },
+  { "RRethy/base16-nvim" },
+  { "xiyaowong/transparent.nvim" },
+
+  -- spell
+  { "kamykn/spelunker.vim" },
+
+  -- lsp
   {
     "VonHeikemen/lsp-zero.nvim",
     dependencies = {
