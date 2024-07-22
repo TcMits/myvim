@@ -16,6 +16,7 @@ local servers = {
   "templ",
   "tailwindcss",
   "bufls",
+  "rust_analyzer",
 }
 
 lsp.preset("recommended")
