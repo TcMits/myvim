@@ -4,7 +4,7 @@ local servers = {
   "gopls",
   "cssls",
   "html",
-  "tsserver",
+  "ts_ls",
   "pyright",
   "bashls",
   "jsonls",
@@ -19,7 +19,6 @@ local servers = {
   "rust_analyzer",
 }
 
-lsp.preset("recommended")
 
 lsp.configure("pyright", {
   settings = {
@@ -55,7 +54,7 @@ lsp.configure("rust_analyzer", {
 })
 
 
-lsp.configure("tsserver", {
+lsp.configure("ts_ls", {
   filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
 })
 
@@ -86,8 +85,9 @@ lsp.configure("clangd", {
 
 local cmp = require("cmp")
 local luasnip = require("luasnip")
+local cmp_format = lsp.cmp_format({details = true})
 
-local cmp_mappings = lsp.defaults.cmp_mappings({
+local cmp_mappings = cmp.mapping.preset.insert({
   ["<CR>"] = cmp.mapping.confirm({ select = true }),
   ["<Tab>"] = cmp.mapping(function(fallback)
     if cmp.visible() then
@@ -119,6 +119,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 
 cmp.setup({
   mapping = cmp_mappings,
+  formatting = cmp_format,
   sources = {
     -- Copilot Source
     { name = "copilot",  group_index = 2 },
@@ -128,16 +129,6 @@ cmp.setup({
     { name = "nvim_lsp", group_index = 2 },
     { name = "path",     group_index = 2 },
     { name = "luasnip",  group_index = 2 },
-  },
-})
-
-lsp.set_preferences({
-  suggest_lsp_servers = true,
-  sign_icons = {
-    error = "E",
-    warn = "W",
-    hint = "H",
-    info = "I",
   },
 })
 
@@ -163,7 +154,7 @@ lsp.format_mapping('=', {
     timeout_ms = 10000,
   },
   servers = {
-    ['tsserver'] = { 'javascript', 'typescript' },
+    ['ts_ls'] = { 'javascript', 'typescript' },
     ['rust_analyzer'] = { 'rust' },
     ['ruff_lsp'] = { 'python' },
     ['lua_ls'] = { 'lua' },
