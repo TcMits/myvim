@@ -47,7 +47,6 @@ require("lazy").setup({
       { "hrsh7th/cmp-nvim-lua" },
       { "zbirenbaum/copilot.lua" },
       { "zbirenbaum/copilot-cmp" },
-      { "Exafunction/codeium.nvim" },
 
       -- Snippets
       { "L3MON4D3/LuaSnip" },
