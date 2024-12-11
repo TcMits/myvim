@@ -11,12 +11,13 @@ local servers = {
   "yamlls",
   "eslint",
   "lua_ls",
-  "ruff_lsp",
+  "ruff",
   "cmake",
   "templ",
   "tailwindcss",
-  "bufls",
+  "buf_ls",
   "rust_analyzer",
+  "tsp-server",
 }
 
 
@@ -85,7 +86,7 @@ lsp.configure("clangd", {
 
 local cmp = require("cmp")
 local luasnip = require("luasnip")
-local cmp_format = lsp.cmp_format({details = true})
+local cmp_format = lsp.cmp_format({ details = true })
 
 local cmp_mappings = cmp.mapping.preset.insert({
   ["<CR>"] = cmp.mapping.confirm({ select = true }),
@@ -154,7 +155,7 @@ lsp.format_mapping('=', {
   servers = {
     ['ts_ls'] = { 'javascript', 'typescript' },
     ['rust_analyzer'] = { 'rust' },
-    ['ruff_lsp'] = { 'python' },
+    ['ruff'] = { 'python' },
     ['lua_ls'] = { 'lua' },
     ['gopls'] = { 'go' },
     ['pyright'] = { 'python' },
@@ -166,7 +167,8 @@ lsp.format_mapping('=', {
     ['cmake'] = { 'cmake' },
     ['templ'] = { 'templ' },
     ['tailwindcss'] = { 'html', 'css' },
-    ['bufls'] = { 'proto' },
+    ['buf_ls'] = { 'proto' },
+    ['tsp-server'] = { 'typespec' },
   }
 })
 

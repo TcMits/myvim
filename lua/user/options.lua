@@ -41,6 +41,8 @@ vim.opt.whichwrap:append("<,>,[,],h,l")
 vim.opt.iskeyword:append("-")
 vim.opt.list = true
 vim.opt.listchars:append "eol:↴"
-vim.g.netrw_bufsettings = "noma nomod nu nobl nowrap ro nornu"
 -- additional filetypes
 vim.filetype.add({ extension = { templ = "templ" }})
+-- disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1

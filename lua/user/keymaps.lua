@@ -52,10 +52,8 @@ keymap("v", "p", '"_dP', opts)
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
--- Plugins --
-
 -- Explore
-keymap("n", "<leader>e", ":Explore<CR>", opts)
+keymap("n", "<leader>e", ":NvimTreeFocus<CR>", opts)
 
 -- Telescope
 keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)

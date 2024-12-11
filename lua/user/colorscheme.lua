@@ -1,4 +1,4 @@
-local colorscheme = "base16-classic-dark"
+local colorscheme = "default"
 
 vim.cmd("colorscheme " .. colorscheme)
 vim.cmd("TransparentEnable")

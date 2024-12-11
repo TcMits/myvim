@@ -22,11 +22,7 @@ require("lazy").setup({
   { "lukas-reineke/indent-blankline.nvim" },
 
   -- Colorschemes
-  { "RRethy/base16-nvim" },
   { "xiyaowong/transparent.nvim" },
-
-  -- spell
-  { "kamykn/spelunker.vim" },
 
   -- lsp
   {
@@ -56,6 +52,9 @@ require("lazy").setup({
 
   -- Telescope
   { "nvim-telescope/telescope.nvim" },
+
+  -- File Tree
+  { "nvim-tree/nvim-tree.lua",         dependencies = { 'nvim-tree/nvim-web-devicons' } },
 
   -- Treesitter
   { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" },
