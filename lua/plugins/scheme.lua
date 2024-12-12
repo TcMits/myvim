@@ -1,9 +1,12 @@
 return {
   {
-    "xiyaowong/transparent.nvim",
+    "rebelot/kanagawa.nvim",
     config = function()
-      vim.cmd("colorscheme minicyan")
-      vim.cmd("TransparentEnable")
+      require('kanagawa').setup({
+        transparent = true,
+      })
+
+      vim.cmd("colorscheme kanagawa-dragon")
     end,
   },
   {
