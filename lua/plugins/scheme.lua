@@ -69,6 +69,9 @@ return {
         sync_install = false,
         auto_install = true,
       })
+
+      -- Enable syntax highlighting
+      vim.cmd("syntax on")
     end,
   },
 }

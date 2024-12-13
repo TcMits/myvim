@@ -32,3 +32,7 @@ vim.opt.signcolumn = "yes" -- always show the sign column, otherwise it would sh
 vim.opt.wrap = false       -- display lines as one long line
 vim.opt.scrolloff = 25     -- is one of my fav
 vim.opt.sidescrolloff = 25
+vim.opt.spelllang = { "en_us" }
+vim.opt.spell = true
+vim.opt.spelloptions:append("camel")
+vim.opt.spellcapcheck = ""
