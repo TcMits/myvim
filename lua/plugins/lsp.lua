@@ -3,7 +3,6 @@ local servers = {
   "cssls",
   "html",
   "ts_ls",
-  "pyright",
   "bashls",
   "jsonls",
   "yamlls",
@@ -15,7 +14,9 @@ local servers = {
   "tailwindcss",
   "rust_analyzer",
   "tsp_server",
+  "pyright",
 }
+
 
 return {
   {
@@ -42,6 +43,70 @@ return {
     },
     config = function()
       vim.diagnostic.config({ virtual_text = true })
+      local util = require("lspconfig.util")
+      local python_root_dir = function(fname)
+        return util.root_pattern('pyproject.toml', 'ruff.toml', '.ruff.toml', 'setup.py', 'setup.cfg', 'requirements.txt',
+              'Pipfile', 'pyrightconfig.json', '.git')(fname)
+            or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+      end
+
+      local server_lsp_configs = {
+        ruff = {
+          root_dir = python_root_dir,
+        },
+        pyright = {
+          root_dir = python_root_dir,
+          settings = {
+            python = {
+              analysis = {
+                autoSearchPaths = true,
+                typeCheckingMode = "off",
+                useLibraryCodeForTypes = true,
+                diagnosticMode = 'openFilesOnly',
+              },
+            },
+          },
+        },
+        yamlls = {
+          settings = {
+            yaml = {
+              keyOrdering = false
+            }
+          }
+        },
+        rust_analyzer = {
+          settings = {
+            ['rust-analyzer'] = {
+              diagnostics = {
+                disabled = { "unresolved-proc-macro" },
+              }
+            }
+          }
+        },
+        ts_ls = {
+          filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+        },
+        tailwindcss = {
+          filetypes = {
+            'templ'
+          },
+          init_options = {
+            userLanguages = {
+              templ = "html"
+            }
+          }
+        },
+        gopls = {
+          settings = {
+            gopls = {
+              gofumpt = true
+            }
+          }
+        },
+        clangd = {
+          filetypes = { "c", "cpp", "objc", "objcpp" },
+        },
+      }
 
 
       -- copilot
@@ -57,74 +122,12 @@ return {
         ensure_installed = servers,
         handlers = {
           function(server_name)
-            require('lspconfig')[server_name].setup({})
+            require('lspconfig')[server_name].setup(server_lsp_configs[server_name] or {})
           end,
         },
       })
 
       local lsp = require("lsp-zero")
-
-      lsp.configure("pyright", {
-        settings = {
-          python = {
-            analysis = {
-              autoSearchPaths = true,
-              typeCheckingMode = "off",
-              useLibraryCodeForTypes = true,
-              diagnosticMode = 'openFilesOnly',
-            },
-          },
-        },
-      })
-
-      lsp.configure("yamlls", {
-        settings = {
-          yaml = {
-            keyOrdering = false
-          }
-        }
-      })
-
-
-      lsp.configure("rust_analyzer", {
-        settings = {
-          ['rust-analyzer'] = {
-            diagnostics = {
-              disabled = { "unresolved-proc-macro" },
-            }
-          }
-        }
-      })
-
-
-      lsp.configure("ts_ls", {
-        filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
-      })
-
-
-      lsp.configure("tailwindcss", {
-        filetypes = {
-          'templ'
-        },
-        init_options = {
-          userLanguages = {
-            templ = "html"
-          }
-        }
-      })
-
-
-      lsp.configure("gopls", {
-        settings = {
-          gopls = {
-            gofumpt = true
-          }
-        }
-      })
-
-      lsp.configure("clangd", {
-        filetypes = { "c", "cpp", "objc", "objcpp" },
-      })
 
       -- auto completions
       local cmp = require("cmp")
@@ -200,7 +203,6 @@ return {
           ['ruff'] = { 'python' },
           ['lua_ls'] = { 'lua' },
           ['gopls'] = { 'go' },
-          ['pyright'] = { 'python' },
           ['bashls'] = { 'bash' },
           ['jsonls'] = { 'json' },
           ['yamlls'] = { 'yaml' },
