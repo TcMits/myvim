@@ -8,7 +8,6 @@ keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
-
 -- vertical motions
 keymap("n", "<C-d>", "<C-d>zz", opts)
 keymap("n", "<C-u>", "<C-u>zz", opts)
@@ -33,3 +32,16 @@ keymap("n", "<C-l>", "<C-w>l", opts)
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
+
+keymap("n", "<leader>h", "", {
+	callback = function()
+		if not vim.o.hlsearch then
+			vim.o.hlsearch = true
+		else
+			vim.o.hlsearch = false
+		end
+	end,
+	noremap = true,
+	silent = true,
+	desc = "Toggle hlsearch mode.",
+})
