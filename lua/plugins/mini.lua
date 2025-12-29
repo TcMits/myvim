@@ -1,20 +1,21 @@
 return {
-  {
-    "echasnovski/mini.nvim",
-    config = function()
-      require("mini.icons").setup({ style = 'ascii' })
+	{
+		"nvim-mini/mini.nvim",
+		version = "*",
+		config = function()
+			require("mini.icons").setup({ style = "ascii" })
 
-      require('mini.statusline').setup()
+			require("mini.statusline").setup()
 
-      require('mini.comment').setup({
-        mappings = {
-          comment = '<leader>/',
-          comment_visual = '<leader>/',
-        },
-      })
+			require("mini.comment").setup({
+				mappings = {
+					comment = "<leader>/",
+					comment_visual = "<leader>/",
+				},
+			})
 
-      require('mini.bufremove').setup()
-      vim.keymap.set("n", "<S-q>", ":bdelete<CR>", { silent = true })
-    end
-  },
+			require("mini.bufremove").setup()
+			vim.keymap.set("n", "<S-q>", ":bdelete<CR>", { silent = true })
+		end,
+	},
 }
