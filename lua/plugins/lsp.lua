@@ -252,10 +252,6 @@ return {
 			vim.api.nvim_create_autocmd("LspAttach", {
 				desc = "LSP actions",
 				callback = function(event)
-					local client = vim.lsp.get_client_by_id(event.data.client_id)
-					local is_node_project = vim.fn.filereadable("package.json") == 1
-					local is_deno_project = vim.fn.filereadable("deno.json") == 1
-					print(client.name)
 					local opts = { buffer = event.buf, remap = false }
 
 					keymap("n", "gd", vim.lsp.buf.definition, opts)
