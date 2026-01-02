@@ -15,6 +15,7 @@ local servers = {
 	"rust_analyzer",
 	"tsp_server",
 	"pyright",
+	"denols",
 }
 
 return {
@@ -39,9 +40,19 @@ return {
 		},
 		config = function()
 			vim.diagnostic.config({ virtual_text = true })
-			local util = require("lspconfig.util")
-			local python_root_dir = function(fname)
-				return util.root_pattern(
+			local function root_pattern(patterns)
+				return function(bufnr, on_dir)
+					local bufname = vim.api.nvim_buf_get_name(bufnr)
+					local pattern = require("lspconfig.util").root_pattern(patterns)
+					local match = pattern(bufname)
+					if match then
+						on_dir(match)
+					end
+				end
+			end
+
+			local python_root_dir = function(fname, on_dir)
+				return root_pattern({
 					"pyproject.toml",
 					"ruff.toml",
 					".ruff.toml",
@@ -50,8 +61,8 @@ return {
 					"requirements.txt",
 					"Pipfile",
 					"pyrightconfig.json",
-					".git"
-				)(fname) or vim.fs.dirname(vim.fs.find(".git", { path = fname, upward = true })[1])
+					".git",
+				})(fname, on_dir) or vim.fs.dirname(vim.fs.find(".git", { path = fname, upward = true })[1])
 			end
 
 			local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -92,6 +103,12 @@ return {
 						},
 					},
 				},
+				denols = {
+					capabilities = lsp_capabilities,
+					settings = { deno = { enable = true, unstable = true } },
+					root_dir = root_pattern({ "deno.json", "deno.jsonc" }),
+					single_file_support = false,
+				},
 				ts_ls = {
 					capabilities = lsp_capabilities,
 					filetypes = {
@@ -102,11 +119,22 @@ return {
 						"typescriptreact",
 						"typescript.tsx",
 					},
+					root_dir = root_pattern({ "package.json" }),
+					single_file_support = false,
 				},
 				tailwindcss = {
 					capabilities = lsp_capabilities,
 					filetypes = {
 						"templ",
+						"javascript",
+						"javascriptreact",
+						"javascript.jsx",
+						"typescript",
+						"typescriptreact",
+						"typescript.tsx",
+						"css",
+						"scss",
+						"less",
 					},
 					init_options = {
 						userLanguages = {
@@ -157,14 +185,14 @@ return {
 			require("mason").setup({})
 			require("mason-lspconfig").setup({
 				ensure_installed = servers,
-				handlers = {
-					function(server_name)
-						require("lspconfig")[server_name].setup(server_lsp_configs[server_name] or {
-							capabilities = lsp_capabilities,
-						})
-					end,
-				},
+				automatic_enable = false,
 			})
+
+			for _, k in pairs(servers) do
+				local config = server_lsp_configs[k] or { capabilities = lsp_capabilities }
+				vim.lsp.config(k, config)
+				vim.lsp.enable(k)
+			end
 
 			-- auto completions
 			local cmp = require("cmp")
@@ -224,6 +252,10 @@ return {
 			vim.api.nvim_create_autocmd("LspAttach", {
 				desc = "LSP actions",
 				callback = function(event)
+					local client = vim.lsp.get_client_by_id(event.data.client_id)
+					local is_node_project = vim.fn.filereadable("package.json") == 1
+					local is_deno_project = vim.fn.filereadable("deno.json") == 1
+					print(client.name)
 					local opts = { buffer = event.buf, remap = false }
 
 					keymap("n", "gd", vim.lsp.buf.definition, opts)
