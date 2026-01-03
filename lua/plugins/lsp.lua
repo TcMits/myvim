@@ -62,7 +62,7 @@ return {
 					"Pipfile",
 					"pyrightconfig.json",
 					".git",
-				})(fname, on_dir) or vim.fs.dirname(vim.fs.find(".git", { path = fname, upward = true })[1])
+				})(fname, on_dir)
 			end
 
 			local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
