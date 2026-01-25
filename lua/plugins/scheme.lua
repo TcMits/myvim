@@ -49,6 +49,7 @@ return {
           "templ",
           "vim",
           "vimdoc",
+          "astro",
         },               -- one of "all" or a list of languages
         highlight = {
           enable = true, -- false will disable the whole extension

@@ -16,6 +16,7 @@ local servers = {
 	"tsp_server",
 	"pyright",
 	"denols",
+  "astro",
 }
 
 return {
@@ -47,6 +48,21 @@ return {
 					local match = pattern(bufname)
 					if match then
 						on_dir(match)
+					end
+				end
+			end
+
+			---Specialized root pattern that allows for an exclusion
+			---@param opt { root: string[], exclude: string[] }
+			local function root_pattern_exclude(opt)
+				local lsputil = require("lspconfig.util")
+				return function(fname, on_dir)
+					local bufname = vim.api.nvim_buf_get_name(fname)
+					local excluded_root = lsputil.root_pattern(opt.exclude)(bufname)
+					local included_root = lsputil.root_pattern(opt.root)(bufname)
+
+					if included_root and not excluded_root then
+						on_dir(included_root)
 					end
 				end
 			end
@@ -119,8 +135,10 @@ return {
 						"typescriptreact",
 						"typescript.tsx",
 					},
-					root_dir = root_pattern({ "package.json" }),
-					single_file_support = false,
+					root_dir = root_pattern_exclude({
+						root = { "package.json" },
+						exclude = { "deno.json", "deno.jsonc" },
+					}),
 				},
 				tailwindcss = {
 					capabilities = lsp_capabilities,
@@ -252,6 +270,11 @@ return {
 			vim.api.nvim_create_autocmd("LspAttach", {
 				desc = "LSP actions",
 				callback = function(event)
+					local client = vim.lsp.get_client_by_id(event.data.client_id)
+					if client == nil then
+						return
+					end
+
 					local opts = { buffer = event.buf, remap = false }
 
 					keymap("n", "gd", vim.lsp.buf.definition, opts)
