@@ -16,7 +16,7 @@ local servers = {
 	"tsp_server",
 	"pyright",
 	"denols",
-  "astro",
+	"astro",
 }
 
 return {
@@ -26,6 +26,7 @@ return {
 			-- LSP Support
 			{ "williamboman/mason.nvim" },
 			{ "williamboman/mason-lspconfig.nvim" },
+			{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 
 			-- Autocompletion
 			{ "hrsh7th/nvim-cmp" },
@@ -201,6 +202,9 @@ return {
 
 			-- install servers
 			require("mason").setup({})
+			require("mason-tool-installer").setup({
+				ensure_installed = { "llm-ls" },
+			})
 			require("mason-lspconfig").setup({
 				ensure_installed = servers,
 				automatic_enable = false,
