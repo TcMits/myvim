@@ -1,4 +1,4 @@
-FILE_TYPES = {
+PARSER = {
 	"c",
 	"query",
 	"markdown",
@@ -55,17 +55,23 @@ return {
 		end,
 		branch = "main",
 		config = function()
-			require("nvim-treesitter").install(FILE_TYPES):wait(300000)
+			require("nvim-treesitter").install(PARSER):wait(300000)
 
 			-- Enable syntax highlighting
 			vim.cmd("syntax on")
 
+			local filetypes = {}
+			for _, p in ipairs(PARSER) do
+				local ft = vim.treesitter.language.get_filetypes(p)
+				for _, v in ipairs(ft) do
+					table.insert(filetypes, v)
+				end
+			end
+
 			vim.api.nvim_create_autocmd("FileType", {
-				callback = function(ev)
-					local lang = vim.treesitter.language.get_lang(ev.match)
-					if lang then
-						vim.treesitter.start()
-					end
+				pattern = filetypes,
+				callback = function()
+					vim.treesitter.start()
 				end,
 			})
 		end,
