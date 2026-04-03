@@ -1,4 +1,3 @@
-plugin/
 # Compiled Lua sources
 luac.out
 
