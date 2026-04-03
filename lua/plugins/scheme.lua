@@ -27,7 +27,7 @@ FILE_TYPES = {
 	"vimdoc",
 	"astro",
 	"sql",
-  "svelte",
+	"svelte",
 }
 
 return {
@@ -61,9 +61,11 @@ return {
 			vim.cmd("syntax on")
 
 			vim.api.nvim_create_autocmd("FileType", {
-				pattern = FILE_TYPES,
-				callback = function()
-					vim.treesitter.start()
+				callback = function(ev)
+					local lang = vim.treesitter.language.get_lang(ev.match)
+					if lang then
+						vim.treesitter.start()
+					end
 				end,
 			})
 		end,
