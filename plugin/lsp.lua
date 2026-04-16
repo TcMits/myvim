@@ -246,7 +246,14 @@ local conform = require("conform")
 conform.setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
-		python = { "ruff" },
+		python = {
+			-- To fix auto-fixable lint errors.
+			"ruff_fix",
+			-- To run the Ruff formatter.
+			"ruff_format",
+			-- To organize the imports.
+			"ruff_organize_imports",
+		},
 		templ = { "templ" },
 		sql = { "sleek" },
 	},
@@ -274,6 +281,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		keymap("n", "K", vim.lsp.buf.hover, opts)
 		keymap("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
 		keymap("n", "gl", vim.diagnostic.open_float, opts)
+		keymap("n", "<leader>lj", function(opts)
+			opts = opts or {}
+			opts.float = vim.F.if_nil(opts.float, true)
+			opts.count = vim.F.if_nil(opts.count, 1)
+			vim.diagnostic.jump(opts)
+		end, opts)
+		keymap("n", "<leader>lk", function(opts)
+			opts = opts or {}
+			opts.float = vim.F.if_nil(opts.float, true)
+			opts.count = vim.F.if_nil(opts.count, -1)
+			vim.diagnostic.jump(opts)
+		end, opts)
 		keymap("n", "<leader>la", vim.lsp.buf.code_action, opts)
 		keymap("n", "gr", vim.lsp.buf.references, opts)
 		keymap("n", "<leader>lr", vim.lsp.buf.rename, opts)
