@@ -31,6 +31,7 @@ local servers = {
 	"pyright",
 	"denols",
 	"astro",
+  "harper_ls",
 }
 
 vim.diagnostic.config({ virtual_text = true })
