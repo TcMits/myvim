@@ -3,8 +3,6 @@ vim.pack.add({
 	"https://github.com/hrsh7th/cmp-buffer",
 	"https://github.com/hrsh7th/cmp-path",
 	"https://github.com/hrsh7th/cmp-nvim-lsp",
-	"https://github.com/zbirenbaum/copilot.lua",
-	"https://github.com/zbirenbaum/copilot-cmp",
 	"https://github.com/stevearc/conform.nvim",
 	"https://github.com/zapling/mason-conform.nvim",
 	"https://github.com/mason-org/mason.nvim",
@@ -31,7 +29,6 @@ local servers = {
 	"pyright",
 	"denols",
 	"astro",
-  "harper_ls",
 }
 
 vim.diagnostic.config({ virtual_text = true })
@@ -186,13 +183,6 @@ local server_lsp_configs = {
 	},
 }
 
--- copilot
-require("copilot").setup({
-	suggestion = { enabled = false },
-	panel = { enabled = false },
-})
-require("copilot_cmp").setup()
-
 -- install servers
 require("mason").setup({})
 require("mason-lspconfig").setup({
@@ -235,7 +225,6 @@ local cmp_mappings = cmp.mapping.preset.insert({
 cmp.setup({
 	mapping = cmp_mappings,
 	sources = {
-		{ name = "copilot", group_index = 2 },
 		{ name = "nvim_lsp", group_index = 2 },
 		{ name = "buffer", group_index = 2 },
 		{ name = "path", group_index = 2 },
