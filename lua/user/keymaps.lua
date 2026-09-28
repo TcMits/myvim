@@ -45,3 +45,7 @@ keymap("n", "<leader>h", "", {
 	silent = true,
 	desc = "Toggle hlsearch mode.",
 })
+
+vim.keymap.set("x", "p", function()
+	return 'pgv"' .. vim.v.register .. "y"
+end, { remap = false, expr = true })
